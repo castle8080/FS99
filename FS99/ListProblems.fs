@@ -168,3 +168,16 @@ let rec split xs n =
             | x :: xs' ->
                 let (left, right) = split xs' (n - 1)
                 (x :: left, right)
+
+(* P18 *)
+let slice xs first last =
+    let rec doSlice xs n =
+        match xs with
+            | _ when n > last -> []
+            | [] -> []
+            | x :: xs' ->
+                if n >= first then
+                    x :: doSlice xs' (n + 1)
+                else
+                    doSlice xs' (n + 1)
+    doSlice xs 1

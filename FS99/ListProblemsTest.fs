@@ -90,3 +90,7 @@ let run =
     problem "p17" "Split a list into two parts; the length of the first part is given." (fun () ->
         printf "%s" (String.Join(",", (split [1;2;3;4;5;6;7] 3)))
     )
+
+    problem "p18" "Extract a slice from a list." (fun () ->
+        printf "%s" (String.Join(",", (slice (Seq.toList "abcdefgh") 3 7)))
+    )
