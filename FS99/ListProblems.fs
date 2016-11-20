@@ -134,3 +134,14 @@ let rec encodeDirect = function
 let rec dupli = function
     | [] -> []
     | x :: xs -> x :: x :: (dupli xs)
+
+(* P15 *)
+let rec repli xs n =
+    let rec repeat x n result =
+        if n = 0 then result
+        else repeat x (n - 1) (x :: result)
+    let rec repliTr xs result =
+        match xs with
+            | [] -> result
+            | x :: xs' -> repliTr xs' (repeat x n result)
+    repliTr xs [] |> List.rev

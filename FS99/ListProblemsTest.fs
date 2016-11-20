@@ -78,3 +78,7 @@ let run =
     problem "p14" "Duplicate the elements of a list." (fun () ->
         printf "%s" (String.Join(",", (dupli [1;1;2])))
     )
+
+    problem "p15" "Replicate the elements of a list a given number of times. " (fun () ->
+        printf "%s" (String.Join(",", (repli [1;2] 3)))
+    )
