@@ -145,3 +145,26 @@ let rec repli xs n =
             | [] -> result
             | x :: xs' -> repliTr xs' (repeat x n result)
     repliTr xs [] |> List.rev
+
+(* P16 *)
+let drop xs n =
+    let rec doDrop xs n' =
+        match xs with
+            | [] -> []
+            | x :: xs' ->
+                if n' = n then
+                    doDrop xs' 1
+                else
+                    x :: doDrop xs' (n' + 1)
+    doDrop xs 1
+
+(* P17 *)
+let rec split xs n =
+    if n = 0 then
+        ([], xs)
+    else
+        match xs with
+            | [] -> ([], [])
+            | x :: xs' ->
+                let (left, right) = split xs' (n - 1)
+                (x :: left, right)

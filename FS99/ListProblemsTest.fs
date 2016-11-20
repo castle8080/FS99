@@ -79,6 +79,14 @@ let run =
         printf "%s" (String.Join(",", (dupli [1;1;2])))
     )
 
-    problem "p15" "Replicate the elements of a list a given number of times. " (fun () ->
+    problem "p15" "Replicate the elements of a list a given number of times." (fun () ->
         printf "%s" (String.Join(",", (repli [1;2] 3)))
+    )
+
+    problem "p16" "Drop every N'th element from a list." (fun () ->
+        printf "%s" (String.Join(",", (drop [1;2;3;4;5;6;7] 3)))
+    )
+
+    problem "p17" "Split a list into two parts; the length of the first part is given." (fun () ->
+        printf "%s" (String.Join(",", (split [1;2;3;4;5;6;7] 3)))
     )
