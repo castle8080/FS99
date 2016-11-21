@@ -185,6 +185,6 @@ let slice xs first last =
 (* P19 *)
 let rotate xs n =
     let len = length xs
-    let n = if n < 0 then len + n else n
+    let n = (if n < 0 then len + n else n) % len
     let (l1, l2) = split xs n
     l2 @ l1

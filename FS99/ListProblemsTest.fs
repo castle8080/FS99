@@ -76,21 +76,27 @@ let run =
     )
 
     problem "p14" "Duplicate the elements of a list." (fun () ->
-        printf "%s" (String.Join(",", (dupli [1;1;2])))
+        printfn "%s" (String.Join(",", (dupli [1;1;2])))
     )
 
     problem "p15" "Replicate the elements of a list a given number of times." (fun () ->
-        printf "%s" (String.Join(",", (repli [1;2] 3)))
+        printfn "%s" (String.Join(",", (repli [1;2] 3)))
     )
 
     problem "p16" "Drop every N'th element from a list." (fun () ->
-        printf "%s" (String.Join(",", (drop [1;2;3;4;5;6;7] 3)))
+        printfn "%s" (String.Join(",", (drop [1;2;3;4;5;6;7] 3)))
     )
 
     problem "p17" "Split a list into two parts; the length of the first part is given." (fun () ->
-        printf "%s" (String.Join(",", (split [1;2;3;4;5;6;7] 3)))
+        printfn "%s" (String.Join(",", (split [1;2;3;4;5;6;7] 3)))
     )
 
     problem "p18" "Extract a slice from a list." (fun () ->
-        printf "%s" (String.Join(",", (slice (Seq.toList "abcdefgh") 3 7)))
+        printfn "%s" (String.Join(",", (slice (Seq.toList "abcdefgh") 3 7)))
     )
+
+    problem "p19" "Rotate a list N places to the left." (fun () ->
+        printfn "%s" (String.Join(",", (rotate (Seq.toList "abcdefgh") 3)))
+        printfn "%s" (String.Join(",", (rotate (Seq.toList "abcdefgh") -2)))
+    )
+
