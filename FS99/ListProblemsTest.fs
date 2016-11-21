@@ -100,3 +100,16 @@ let run =
         printfn "%s" (String.Join(",", (rotate (Seq.toList "abcdefgh") -2)))
     )
 
+    problem "p20" "Remove the K'th element from a list." (fun () ->
+        printfn "%s" (String.Join(",", (removeAt (Seq.toList "abcdefgh") 3)))
+        printfn "%s" (String.Join(",", (removeAt (Seq.toList "abcdefgh") 1)))
+        printfn "%s" (String.Join(",", (removeAt (Seq.toList "abcdefgh") 0)))
+    )
+
+    problem "p21" "Insert an element at a given position into a list." (fun () ->
+        printfn "%s" (String.Join("", (insertAt 'x' (Seq.toList "abcdefgh") 3)))
+        printfn "%s" (String.Join("", (insertAt 'x' (Seq.toList "abcdefgh") 1)))
+        printfn "%s" (String.Join("", (insertAt 'x' (Seq.toList "abcdefgh") 0)))
+        printfn "%s" (String.Join("", (insertAt 'x' (Seq.toList "abcdefgh") 100)))
+    )
+

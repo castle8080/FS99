@@ -188,3 +188,24 @@ let rotate xs n =
     let n = (if n < 0 then len + n else n) % len
     let (l1, l2) = split xs n
     l2 @ l1
+
+(* P20 *)
+let removeAt xs n =
+    let len = length xs
+    if n < 1 || n > len then
+        xs
+    else
+        match (split xs (n - 1)) with
+            | (l1, e :: l2) -> l1 @ l2
+            | _ -> xs
+
+(* P21 *)
+let insertAt x xs n =
+    let len = length xs
+    if n <= 1 then
+        x :: xs
+    elif n >= len then
+        xs @ [x]
+    else
+        let (l1,l2) = split xs n
+        l1 @ (x :: l2)
