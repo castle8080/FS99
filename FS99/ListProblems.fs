@@ -181,3 +181,10 @@ let slice xs first last =
                 else
                     doSlice xs' (n + 1)
     doSlice xs 1
+
+(* P19 *)
+let rotate xs n =
+    let len = length xs
+    let n = if n < 0 then len + n else n
+    let (l1, l2) = split xs n
+    l2 @ l1
