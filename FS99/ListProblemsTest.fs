@@ -2,6 +2,7 @@ module ListProblemsTest
 
 open System
 open ListProblems
+open FsUnit
 
 (*
   Runs some calls to List ListProblems
@@ -15,17 +16,24 @@ let problem name description work =
     printfn "---------------------------------------"
     printfn "%s: %s" name description
     printfn "---------------------------------------"
-    work()
-    printfn ""
-
+    try
+        work()
+        printfn "[PASS]"
+    with
+        | ex ->
+            printfn "[FAIL]"
+            printfn "%s" ex.Message
+            printfn "%s" ex.StackTrace
 let run =
 
     problem "p01" "Find the last box of a list." (fun () ->
-        printfn "%d" (last [1;2])
+        last [1;2] |> should equal 2
+        last [7] |> should equal 7
     )
 
     problem "p02" "Find the last but one box of a list." (fun () ->
-        printfn "%s" ((butLast [1;1;2;3;5;8]).ToString())
+        butLast [1;1;2;3;5;8] |> should equal [5;8]
+        butLast [1;8] |> should equal [1;8]
     )
 
     problem "p03" "Find the K'th element of a list." (fun () ->
