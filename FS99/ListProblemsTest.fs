@@ -143,3 +143,9 @@ let run =
         insertAt 'x' (Seq.toList "abcdefgh") 100|> should equal (Seq.toList "abcdefghx")
     )
 
+    problem "p22" "Create a list containing all integers within a given range." (fun () ->
+        range 1 5 |> should equal [1;2;3;4;5]
+        range 1 1 |> should equal [1]
+        range 2 -2 |> should equal [2;1;0;-1;-2]
+    )
+

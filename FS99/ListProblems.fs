@@ -209,3 +209,15 @@ let insertAt x xs n =
     else
         let (l1,l2) = split xs n
         l1 @ (x :: l2)
+
+(* P22 *)
+let range start fin =
+    let rec createRange start fin skip results =
+        if start = fin then
+            start :: results
+        else
+            createRange (start + skip) fin skip (start :: results)
+    if start < fin then
+        createRange fin start -1 []
+    else
+        createRange fin start 1 []
