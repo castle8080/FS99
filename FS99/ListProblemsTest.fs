@@ -8,8 +8,6 @@ open FsUnit
   Runs some calls to List ListProblems
   The code below is not what I would call good practice for testing.
   It was done just to be quick and see some results.
-  
-  TODO: Add some real tests.
 *)
 
 let problem name description work =
@@ -37,87 +35,111 @@ let run =
     )
 
     problem "p03" "Find the K'th element of a list." (fun () ->
-        printfn "%d" (elementAt [1;2;3;4] 3)
+        elementAt [1;2;3;4] 3 |> should equal 3
     )
 
     problem "p04" "Find the number of elements of a list." (fun () ->
-        printfn "%d" (length [1])
+        length [] |> should equal 0
+        length [1] |> should equal 1
+        length [1;2;3;4] |> should equal 4
     )
 
     problem "p05" "Reverse a list." (fun () ->
-        printfn "%s" ((reverse [1;2;3]).ToString())
+        reverse [1;2;3] |> should equal [3;2;1]
+        reverse [] |> should equal []
     )
 
     problem "p06" "Find out whether a list is a palindrome." (fun () ->
-        printfn "%b" (isPalindrome [1,2,1])
-        printfn "%b" (isPalindrome [1,2,2])
+        isPalindrome [1,2,1] |> should equal true
+        isPalindrome [] |> should equal true
+        isPalindrome [1;2] |> should equal false
     )
 
     problem "p07" "Flatten a nested list structure." (fun () ->
         let s = NestedListList [NestedListElement 1; NestedListList [NestedListElement 8; NestedListElement 9]]
-        printfn "%s" ((nestedFlatten s).ToString())
+        nestedFlatten s |> should equal [1;8;9]
     )
 
     problem "p08" "Eliminate consecutive duplicates of list elements." (fun () ->
-        printfn "%s" (String.Join(",", (dedup [1;1;2;3;3;3;4])))
+        dedup [1;1;2;3;3;3;4] |> should equal [1;2;3;4]
+        dedup [] |> should equal []
+        dedup [1] |> should equal [1]
     )
 
     problem "p09" "Pack consecutive duplicates of list elements into sublists." (fun () ->
-        printfn "%s" ((pack [1;1;2;3;3;3]).ToString())
+        pack [1;1;2;3;3;3] |> should equal [[1;1]; [2]; [3;3;3]]
     )
 
     problem "p10" "Run-length encoding of a list." (fun () ->
-        printfn "%s" (String.Join(",", (encode ['a';'a';'a';'a';'b';'c';'c';'a';'a';'d';'e';'e';'e';'e'])))
+        encode ['a';'a';'a';'a';'b';'c';'c';'a';'a';'d';'e';'e';'e';'e']
+            |> should equal ['a', 4; 'b', 1; 'c', 2; 'a', 2; 'd', 1; 'e', 4]
     )
 
     problem "p11" "Modified run-length encoding. " (fun () ->
-        printfn "%s" (String.Join(",", (encodeModified ['a';'a';'a';'a';'b';'c';'c';'a';'a';'d';'e';'e';'e';'e'])))
+        encodeModified ['a';'a';'a';'a';'b';'c';'c';'a';'a';'d';'e';'e';'e';'e']
+            |> should equal [
+                Multiple ('a', 4);
+                Single 'b';
+                Multiple ('c', 2);
+                Multiple ('a', 2);
+                Single 'd';
+                Multiple ('e', 4)
+            ]
     )
 
     problem "p12" "Decode a run-length encoded list." (fun () ->
         let r = [Single 9; Multiple (8, 4)]
-        printf "%s" (String.Join(",", (decode r)))
+        decode r |> should equal [9;8;8;8;8]
     )
 
     problem "p13" "Run-length encoding of a list (direct solution)." (fun () ->
-        printfn "%s" (String.Join(",", (encodeDirect ['a';'a';'a';'a';'b';'c';'c';'a';'a';'d';'e';'e';'e';'e'])))
+        encodeDirect ['a';'a';'a';'a';'b';'c';'c';'a';'a';'d';'e';'e';'e';'e']
+            |> should equal [
+                Multiple ('a', 4);
+                Single 'b';
+                Multiple ('c', 2);
+                Multiple ('a', 2);
+                Single 'd';
+                Multiple ('e', 4)
+            ]
     )
 
     problem "p14" "Duplicate the elements of a list." (fun () ->
-        printfn "%s" (String.Join(",", (dupli [1;1;2])))
+        dupli [1;1;2] |> should equal [1;1;1;1;2;2]
     )
 
     problem "p15" "Replicate the elements of a list a given number of times." (fun () ->
-        printfn "%s" (String.Join(",", (repli [1;2] 3)))
+        repli [1;2] 3 |> should equal [1;1;1;2;2;2]
     )
 
     problem "p16" "Drop every N'th element from a list." (fun () ->
-        printfn "%s" (String.Join(",", (drop [1;2;3;4;5;6;7] 3)))
+        drop [1;2;3;4;5;6;7] 3 |> should equal [1;2;4;5;7]
     )
 
     problem "p17" "Split a list into two parts; the length of the first part is given." (fun () ->
-        printfn "%s" (String.Join(",", (split [1;2;3;4;5;6;7] 3)))
+        split [1;2;3;4;5;6;7] 3 |> should equal ([1;2;3], [4;5;6;7])
     )
 
     problem "p18" "Extract a slice from a list." (fun () ->
-        printfn "%s" (String.Join(",", (slice (Seq.toList "abcdefgh") 3 7)))
+        slice (Seq.toList "abcdefgh") 3 7 |> should equal (Seq.toList "cdefg")
     )
 
     problem "p19" "Rotate a list N places to the left." (fun () ->
-        printfn "%s" (String.Join(",", (rotate (Seq.toList "abcdefgh") 3)))
-        printfn "%s" (String.Join(",", (rotate (Seq.toList "abcdefgh") -2)))
+        rotate (Seq.toList "abcdefgh") 3 |> should equal (Seq.toList "defghabc")
+        rotate (Seq.toList "abcdefgh") -2 |> should equal (Seq.toList "ghabcdef")
+        rotate (Seq.toList "abcdefgh") 0 |> should equal (Seq.toList "abcdefgh")
     )
 
     problem "p20" "Remove the K'th element from a list." (fun () ->
-        printfn "%s" (String.Join(",", (removeAt (Seq.toList "abcdefgh") 3)))
-        printfn "%s" (String.Join(",", (removeAt (Seq.toList "abcdefgh") 1)))
-        printfn "%s" (String.Join(",", (removeAt (Seq.toList "abcdefgh") 0)))
+        removeAt (Seq.toList "abcdefgh") 3 |> should equal (Seq.toList "abdefgh")
+        removeAt (Seq.toList "abcdefgh") 1 |> should equal (Seq.toList "bcdefgh")
+        removeAt (Seq.toList "abcdefgh") 0 |> should equal (Seq.toList "abcdefgh")
     )
 
     problem "p21" "Insert an element at a given position into a list." (fun () ->
-        printfn "%s" (String.Join("", (insertAt 'x' (Seq.toList "abcdefgh") 3)))
-        printfn "%s" (String.Join("", (insertAt 'x' (Seq.toList "abcdefgh") 1)))
-        printfn "%s" (String.Join("", (insertAt 'x' (Seq.toList "abcdefgh") 0)))
-        printfn "%s" (String.Join("", (insertAt 'x' (Seq.toList "abcdefgh") 100)))
+        insertAt 'x' (Seq.toList "abcdefgh") 3 |> should equal (Seq.toList "abcxdefgh")
+        insertAt 'x' (Seq.toList "abcdefgh") 1 |> should equal (Seq.toList "xabcdefgh")
+        insertAt 'x' (Seq.toList "abcdefgh") 0|> should equal (Seq.toList "xabcdefgh")
+        insertAt 'x' (Seq.toList "abcdefgh") 100|> should equal (Seq.toList "abcdefghx")
     )
 
